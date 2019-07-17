@@ -22,6 +22,7 @@ public class VigenereCipher {
     {
 
 
+
         int val=0;
         for(int i=0;i<26;i++)
         {
@@ -71,10 +72,23 @@ public class VigenereCipher {
         plain_text = in.nextLine();
         System.out.print("Enter key : ");
         key = in.nextLine();
+        if(plain_text.length() > key.length())
+        {
+            int diff = plain_text.length()-key.length();
+            int pos=0;
+            while(diff>0)
+            {
+                key+=key.charAt(pos);
+                pos = (pos+1)%key.length();
+                diff--;
+            }
+        }
+        System.out.println("Key " +key);
         String encrypted = Encrypt(plain_text,key);
         System.out.println(encrypted);
         String decrypted = Decrypt(encrypted,key);
-        System.out.println(decrypted);        
+        System.out.println(decrypted);    
+        in.close();    
         return;
     }
 
