@@ -44,7 +44,7 @@ public class SHA1 {
 		}
 
 		String lengthInBinary_s = toNBits(Integer.toBinaryString(lengthInBinary_i), 64);
-		
+
 		input_binary += lengthInBinary_s;
 
 		int tmp = input_binary.length() / 512;
@@ -54,6 +54,13 @@ public class SHA1 {
 			String sub = input_binary.substring(i * 512, (i + 1) * 512);
 			chunks[i] = sub;
 		}
+
+		// for(int i=0;i<64;i++)
+		// {
+		// 	String temp = chunks[0].substring(i*8, i*8+8);
+		// 	int n = Integer.parseInt(temp,2);
+		// 	System.out.println(n);
+		// }
 
 		String words[][] = new String[tmp][80];
 
@@ -73,6 +80,8 @@ public class SHA1 {
 
 				words[i][j] = rotateLeft(xor(xor(xor(a, b), c), d), 1);
 			}
+
+
 
 			A = h0;
 			B = h1;
@@ -96,7 +105,7 @@ public class SHA1 {
 					F = function4(A, B, C, D, E);
 					K = "11001010011000101100000111010110";
 				}
-				// if (j == 0) break;		
+				// if (j == 0) break;
 
 				String x = addAll(A, F, E, K, word);
 				x = x.substring(x.length() - 32, x.length());
